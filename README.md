@@ -2,11 +2,11 @@
 
 An experiment with using [Calloop] to drive a [Ratatui] app.
 
-- [src/main.rs]: main entry point
-- [src/event.rs]: the application event loop and interaction with calloop
-- [src/app.rs]: the application logic
-- [src/error.rs]: color-eyre setup
-- [src/tui.rs]: ratatui setup
+- [main.rs](src/main.rs) main entry point
+- [event.rs](src/event.rs): the application event loop and interaction with calloop
+- [app.rs](src/app.rs): the application logic
+- [error.rs](src/error.rs): color-eyre setup
+- [tui.rs](src/tui.rs): ratatui setup
 
 ## Usage
 
