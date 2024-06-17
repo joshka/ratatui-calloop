@@ -27,7 +27,11 @@ impl ApplicationLoop {
         let crossterm_event_channel = start_crossterm_event_thread();
         event_loop
             .handle()
-            .insert_source(crossterm_event_channel, on_crossterm_event)
+            .insert_source(crossterm_event_channel, |event, _metadata, app| {
+                if let Event::Msg(event) = event {
+                    app.on_crossterm_event(event);
+                }
+            })
             .map_err(|e| eyre!("failed to insert crossterm event source: {e}"))?;
 
         Ok(Self { event_loop })
@@ -53,12 +57,6 @@ impl ApplicationLoop {
     /// should exit).s
     pub fn loop_signal(&self) -> LoopSignal {
         self.event_loop.get_signal()
-    }
-}
-
-fn on_crossterm_event(event: Event<CrosstermEvent>, _metadata: &mut (), app: &mut App) {
-    if let Event::Msg(event) = event {
-        app.on_crossterm_event(event);
     }
 }
 
