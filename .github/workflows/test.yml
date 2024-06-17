@@ -10,6 +10,6 @@ jobs:
   test:
     uses: joshka/github-workflows/.github/workflows/rust-test.yml@main
     with:
-      crate-type: bin
+      crate_type: "bin"
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
