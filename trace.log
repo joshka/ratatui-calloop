@@ -1,3 +1,0 @@
-[2m2024-06-21T09:28:03.973948Z[0m [35mTRACE[0m [2mcalloop::loop_logic[0m[2m:[0m Inserting new source [3msource[0m[2m=[0m0
-[2m2024-06-21T09:28:05.144502Z[0m [35mTRACE[0m [2mcalloop::loop_logic[0m[2m:[0m Dispatching events for source [3msource[0m[2m=[0m0
-[2m2024-06-21T09:28:05.144588Z[0m [35mTRACE[0m [2mcalloop::sources[0m[2m:[0m Processing events for source type ratatui_calloop::event::crossterm::CrosstermEventSource
