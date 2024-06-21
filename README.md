@@ -11,7 +11,7 @@ cargo run --example demo
 
 ## Example
 
-<https://github.com/joshka/ratatui-calloop/tree/main/src/examples/demo/main.rs>
+<https://github.com/joshka/ratatui-calloop/blob/main/examples/demo/main.rs>
 
 ## TODO / Ideas
 
