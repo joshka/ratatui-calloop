@@ -1,8 +1,13 @@
 [package]
 name = "ratatui-calloop"
+description = "A small library for building calloop EventLoop based Ratatui applications"
 version = "0.1.0"
 edition = "2021"
-license = "MIT"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/joshka/ratatui-calloop"
+authors = ["Joshka"]
+categories = ["command-line-interface", "gui"]
+keywords = ["cli", "console", "ratatui", "terminal", "tui"]
 
 [dependencies]
 # this fork uses tracing instead of log
