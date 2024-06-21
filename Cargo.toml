@@ -4,7 +4,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-calloop = "0.14.0"
+# this fork uses tracing instead of log
+calloop = { version = "0.14.0", git = "https://github.com/joshka/calloop.git", branch = "master" }
 color-eyre = "0.6.3"
 crossterm = "0.27.0"
 ratatui = "0.26.3"
+tracing = "0.1.40"
+tracing-appender = "0.2.3"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }

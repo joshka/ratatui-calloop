@@ -1,13 +1,12 @@
-use std::{thread, time::Duration};
+use std::time::Duration;
 
-use calloop::{
-    channel::{channel, Channel, Event},
-    EventLoop, LoopSignal,
-};
-use color_eyre::{eyre::eyre, Result};
-use crossterm::event::Event as CrosstermEvent;
+use calloop::{EventLoop, LoopSignal};
+use color_eyre::eyre::eyre;
+use crossterm::CrosstermEventSource;
 
 use crate::{tui, App};
+
+mod crossterm;
 
 /// The main event loop for the application.
 ///
@@ -22,15 +21,13 @@ impl ApplicationLoop {
     /// Create a new `ApplicationLoop`.
     ///
     /// This will create a new event loop and insert a source for crossterm events.
-    pub fn new() -> Result<Self> {
+    pub fn new() -> color_eyre::Result<Self> {
         let event_loop = EventLoop::<App>::try_new()?;
-        let crossterm_event_channel = start_crossterm_event_thread();
+        let crossterm_event_source = CrosstermEventSource::new()?;
         event_loop
             .handle()
-            .insert_source(crossterm_event_channel, |event, _metadata, app| {
-                if let Event::Msg(event) = event {
-                    app.on_crossterm_event(event);
-                }
+            .insert_source(crossterm_event_source, |event, _metadata, app| {
+                app.on_crossterm_event(event);
             })
             .map_err(|e| eyre!("failed to insert crossterm event source: {e}"))?;
 
@@ -41,9 +38,9 @@ impl ApplicationLoop {
     ///
     /// This will run the event loop until the application signals that it should stop.
     /// The application will be drawn to the terminal on each frame (60 fps).
-    pub fn run(&mut self, app: &mut App) -> Result<()> {
+    pub fn run(&mut self, app: &mut App) -> color_eyre::Result<()> {
         let mut terminal = tui::init_terminal()?;
-        let frame_rate = Duration::from_secs_f32(1.0 / 60.0); // 60 fps
+        let frame_rate = Duration::from_secs_f32(1.0 / 2.0); // 60 fps
         self.event_loop.run(frame_rate, app, |app| {
             app.draw(&mut terminal);
         })?;
@@ -58,18 +55,4 @@ impl ApplicationLoop {
     pub fn loop_signal(&self) -> LoopSignal {
         self.event_loop.get_signal()
     }
-}
-
-/// Start a thread that polls for crossterm events and sends them to a channel.
-fn start_crossterm_event_thread() -> Channel<CrosstermEvent> {
-    let (sender, channel) = channel();
-    thread::spawn(move || {
-        while let Ok(event) = crossterm::event::read() {
-            if sender.send(event).is_err() {
-                // the channel has been dropped, so no need to keep reading events
-                break;
-            }
-        }
-    });
-    channel
 }
