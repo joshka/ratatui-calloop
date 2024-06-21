@@ -12,7 +12,7 @@ use tracing_subscriber::EnvFilter;
 /// Makes the app resilient to panics and errors by restoring the terminal before printing the
 /// panic or error message. This prevents error messages from being messed up by the terminal
 /// state.
-pub fn int_error_handling() -> color_eyre::Result<()> {
+pub fn init_error_handling() -> color_eyre::Result<()> {
     let (panic_hook, eyre_hook) = HookBuilder::default().into_hooks();
     install_panic_hook(panic_hook);
     install_error_hook(eyre_hook)?;

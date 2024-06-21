@@ -8,7 +8,7 @@ use ratatui_calloop::{App, ApplicationLoop, Terminal};
 mod util;
 
 fn main() -> color_eyre::Result<()> {
-    util::int_error_handling()?;
+    util::init_error_handling()?;
     util::init_logging()?;
 
     let mut app_loop = ApplicationLoop::new()?;
