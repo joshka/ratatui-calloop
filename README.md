@@ -1,4 +1,4 @@
-# Ratatui-calloopp
+# Ratatui-calloop
 
 An experiment with using [Calloop] to drive a [Ratatui] app.
 
