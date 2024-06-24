@@ -74,7 +74,7 @@ checksum = "cf4b9d6a944f767f8e5e0db018570623c85f3d925ac718db4e06d0187adb21c1"
 [[package]]
 name = "calloop"
 version = "0.14.0"
-source = "git+https://github.com/joshka/calloop.git?branch=master#95df821f8b21e8450179e06d44e662608fc09cfa"
+source = "git+https://github.com/joshka/calloop.git?branch=master#3ce54aa9299901e0422affcc19e9eb93730f6e02"
 dependencies = [
  "bitflags",
  "polling",
