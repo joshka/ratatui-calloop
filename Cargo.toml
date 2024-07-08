@@ -9,12 +9,19 @@ authors = ["Joshka"]
 categories = ["command-line-interface", "gui"]
 keywords = ["cli", "console", "ratatui", "terminal", "tui"]
 
+[features]
+default = ["color-eyre"]
+
+## Installs [color-eyre] panic and error hooks during terminal initialization to provide better
+## error messages and backtraces. This feature is optional and can be disabled if you don't want
+## to use it.
+##
+## [color-eyre]: https://docs.rs/color-eyre
+color-eyre = ["dep:color-eyre"]
+
 [dependencies]
-# this fork uses tracing instead of log
-calloop = { version = "0.14.0", git = "https://github.com/joshka/calloop.git", branch = "master" }
-color-eyre = "0.6.3"
-crossterm = "0.27.0"
-ratatui = "0.27.0"
-tracing = "0.1.40"
-tracing-appender = "0.2.3"
-tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+calloop = { version = "0.14.0" }
+color-eyre = { version = "0.6.3", optional = true }
+document-features = "0.2.8"
+ratatui = { version = "0.27.0", features = ["crossterm"] }
+thiserror = "1.0.61"
