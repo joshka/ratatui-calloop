@@ -4,7 +4,7 @@ use calloop::{
     channel::{channel, Channel, Event, Sender},
     EventSource, Poll, Readiness, Token, TokenFactory,
 };
-use crossterm::{
+use ratatui::crossterm::{
     event::{self, Event as CrosstermEvent},
     terminal::{disable_raw_mode, enable_raw_mode},
 };

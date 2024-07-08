@@ -15,7 +15,8 @@ cargo run --example demo
 
 ## TODO / Ideas
 
-See <https://github.com/joshka/ratatui-calloop/issues/1>
+- [ ] Add user events / channel for interaction between multiple parts of the app
+- [ ] More complex app
 
 [Ratatui]: https://crates.io/crates/ratatui
 [Calloop]: https://crates.io/crates/calloop
