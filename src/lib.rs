@@ -24,9 +24,7 @@
 
 pub use app::{App, ApplicationLoop};
 pub use error::{Error, Result};
-pub use terminal::Terminal;
 
 mod app;
 mod crossterm;
 mod error;
-mod terminal;

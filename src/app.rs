@@ -1,12 +1,11 @@
-use std::{io, time::Duration};
+use std::time::Duration;
 
-use crate::{
-    crossterm::CrosstermEventSource,
-    terminal::{init, restore, Terminal},
-    Result,
-};
+use crate::{crossterm::CrosstermEventSource, Result};
 use calloop::{EventLoop, LoopSignal};
-use ratatui::crossterm::event::{Event as CrosstermEvent, KeyEvent, KeyEventKind, MouseEvent};
+use ratatui::{
+    crossterm::event::{Event as CrosstermEvent, KeyEvent, KeyEventKind, MouseEvent},
+    Frame,
+};
 
 /// A trait for the main application struct.
 ///
@@ -61,24 +60,22 @@ pub trait App {
     ///
     /// ```
     /// use std::io;
-    /// use ratatui_calloop::{App, Terminal};
-    /// use ratatui::text::Text;
+    /// use ratatui_calloop::App;
+    /// use ratatui::{text::Text, Frame};
     ///
     /// struct MyApp {
     ///     counter: i32,
     /// }
     ///
     /// impl App for MyApp {
-    ///     fn draw(&self, terminal: &mut Terminal) -> io::Result<()> {
-    ///         terminal.draw(|frame| {
-    ///             let text = Text::raw(format!("Counter: {}", self.counter));
-    ///             frame.render_widget(&text, frame.size());
-    ///         })?;
+    ///     fn draw(&self, frame: &mut Frame) {
+    ///         let text = Text::raw(format!("Counter: {}", self.counter));
+    ///         frame.render_widget(&text, frame.size());
     ///         Ok(())
     ///     }
     /// }
     /// ```
-    fn draw(&self, terminal: &mut Terminal) -> io::Result<()>;
+    fn draw(&self, frame: &mut Frame);
 
     /// Handle a crossterm event.
     ///
@@ -168,14 +165,14 @@ impl<T: App> ApplicationLoop<T> {
     /// This will run the event loop until the application signals that it should stop.
     /// The application will be drawn to the terminal on each frame (60 fps).
     pub fn run(&mut self, app: &mut T) -> Result<()> {
-        let mut terminal = init()?;
+        let mut terminal = ratatui::init();
         let frame_rate = Duration::from_secs_f32(1.0 / 2.0); // 60 fps
         self.event_loop.run(frame_rate, app, |app| {
             // TODO handle errors here nicely somehow rather than swallowing them
             // likely needs to send a message or something
-            let _ = app.draw(&mut terminal);
+            let _ = terminal.draw(|frame| app.draw(frame));
         })?;
-        restore()?;
+        ratatui::restore();
         Ok(())
     }
 
