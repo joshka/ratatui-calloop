@@ -3,8 +3,9 @@ use ratatui::{
     crossterm::event::{KeyCode, KeyEvent},
     layout::Rect,
     text::Text,
+    Frame,
 };
-use ratatui_calloop::{App, ApplicationLoop, Result, Terminal};
+use ratatui_calloop::{App, ApplicationLoop, Result};
 
 fn main() -> Result<()> {
     let mut app_loop = ApplicationLoop::new()?;
@@ -21,12 +22,9 @@ pub struct DemoApp {
 }
 
 impl App for DemoApp {
-    fn draw(&self, terminal: &mut Terminal) -> std::io::Result<()> {
-        terminal.draw(|frame| {
-            let text = Text::raw(format!("Counter: {} <↑/↓> <q: quit>", self.counter));
-            frame.render_widget(&text, Rect::default());
-        })?;
-        Ok(())
+    fn draw(&self, frame: &mut Frame) {
+        let text = Text::raw(format!("Counter: {} <↑/↓> <q: quit>", self.counter));
+        frame.render_widget(&text, Rect::default());
     }
 
     fn on_key_event(&mut self, event: KeyEvent) {
