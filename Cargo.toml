@@ -20,7 +20,7 @@ default = ["color-eyre"]
 color-eyre = ["dep:color-eyre"]
 
 [dependencies]
-calloop = { version = "0.14.0" }
+calloop = { version = "0.14.1" }
 color-eyre = { version = "0.6.3", optional = true }
 document-features = "0.2.10"
 ratatui = { version = "0.28.1", features = ["crossterm"] }
