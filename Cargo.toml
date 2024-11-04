@@ -24,4 +24,4 @@ calloop = { version = "0.14.1" }
 color-eyre = { version = "0.6.3", optional = true }
 document-features = "0.2.10"
 ratatui = { version = "0.28.1", features = ["crossterm"] }
-thiserror = "1.0.64"
+thiserror = "1.0.67"
