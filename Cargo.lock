@@ -64,9 +64,9 @@ checksum = "b048fb63fd8b5923fc5aa7b340d8e156aec7ec02f0c78fa8a6ddc2613f6f71de"
 
 [[package]]
 name = "calloop"
-version = "0.14.1"
+version = "0.14.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a1ead1e1514bce44c0f40e027899fbc595907fc112635bed21b3b5d975c0a5e7"
+checksum = "10929724661d1c43856fd87c7a127ae944ec55579134fb485e4136fb6a46fdcb"
 dependencies = [
  "bitflags",
  "polling",
