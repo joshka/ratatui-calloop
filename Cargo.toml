@@ -8,6 +8,7 @@ repository = "https://github.com/joshka/ratatui-calloop"
 authors = ["Joshka"]
 categories = ["command-line-interface", "gui"]
 keywords = ["cli", "console", "ratatui", "terminal", "tui"]
+rust-version = "1.82"
 
 [features]
 default = ["color-eyre"]
@@ -20,8 +21,8 @@ default = ["color-eyre"]
 color-eyre = ["dep:color-eyre"]
 
 [dependencies]
-calloop = { version = "0.14.2" }
-color-eyre = { version = "0.6.3", optional = true }
-document-features = "0.2.10"
-ratatui = { version = "0.29.0", features = ["crossterm"] }
-thiserror = "2.0.17"
+calloop = { version = "0.14" }
+color-eyre = { version = "0.6", optional = true }
+document-features = "0.2"
+ratatui = { version = "0.29", features = ["crossterm"] }
+thiserror = "2.0"
