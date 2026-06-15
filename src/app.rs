@@ -21,9 +21,8 @@ use ratatui::{
 /// # Example
 ///
 /// ```
-/// use std::io;
-/// use ratatui_calloop::{App, Terminal};
-/// use ratatui::{crossterm::event::{KeyCode, KeyEvent}, text::Text};
+/// use ratatui_calloop::App;
+/// use ratatui::{crossterm::event::{KeyCode, KeyEvent}, text::Text, Frame};
 ///
 /// struct MyApp {
 ///     should_exit: bool,
@@ -31,12 +30,9 @@ use ratatui::{
 /// }
 ///
 /// impl App for MyApp {
-///     fn draw(&self, terminal: &mut Terminal) -> io::Result<()> {
-///         terminal.draw(|frame| {
-///             let text = Text::raw(format!("Counter: {}", self.counter));
-///             frame.render_widget(&text, frame.size());
-///         })?;
-///         Ok(())
+///     fn draw(&self, frame: &mut Frame) {
+///         let text = Text::raw(format!("Counter: {}", self.counter));
+///         frame.render_widget(&text, frame.area());
 ///     }
 ///
 ///     fn on_key_event(&mut self, event: KeyEvent) {
@@ -54,12 +50,11 @@ pub trait App {
 
     /// Draw the application to the terminal.
     ///
-    /// This method should draw the application to the terminal using the provided `Terminal` instance.
+    /// This method should draw the application to the terminal using the provided `Frame` instance.
     ///
     /// # Example
     ///
     /// ```
-    /// use std::io;
     /// use ratatui_calloop::App;
     /// use ratatui::{text::Text, Frame};
     ///
@@ -70,8 +65,7 @@ pub trait App {
     /// impl App for MyApp {
     ///     fn draw(&self, frame: &mut Frame) {
     ///         let text = Text::raw(format!("Counter: {}", self.counter));
-    ///         frame.render_widget(&text, frame.size());
-    ///         Ok(())
+    ///         frame.render_widget(&text, frame.area());
     ///     }
     /// }
     /// ```
